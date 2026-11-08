@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог</title>
+<style>
+:root{--r:24px}
+*{box-sizing:border-box}
+body{margin:0;background:#f1f2f5;color:#1c1f26;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header{max-width:1000px;margin:0 auto;padding:24px 20px;display:flex;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:28px}
+#cart{padding:10px 18px;background:#fff;border:1px solid #d3d6de;border-radius:var(--r);font-size:16px}
+main{max-width:1000px;margin:0 auto;padding:0 20px 48px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #d3d6de;border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px}
+.card img{width:100%;height:auto;display:block;border-radius:var(--r)}
+.card h2{margin:8px 0 0;font-size:20px}
+.price{margin:0;font-size:18px;color:#4a505c}
+.buy{margin-top:8px;height:48px;border:0;border-radius:var(--r);background:#2b59ff;color:#fff;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer}
+.buy:focus-visible{outline:3px solid #1c1f26;outline-offset:2px}
+#dbg{position:fixed;left:0;right:0;bottom:0;background:#1c1f26;color:#fff;padding:12px 20px;font:14px monospace;max-height:40vh;overflow:auto;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<header><h1>Каталог</h1><div id="cart">Корзина: 0</div></header>
+<main>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23cfd8ff'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%234a6cf7'/%3E%3C/svg%3E" width="400" height="300" alt="Кружка"><h2>Кружка</h2><p class="price">450 ₽</p><button class="buy" data-item="Кружка">В корзину</button></article>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ffd9cd'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%23e8603c'/%3E%3C/svg%3E" width="400" height="300" alt="Термос"><h2>Термос</h2><p class="price">1290 ₽</p><button class="buy" data-item="Термос">В корзину</button></article>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23d4f0dc'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%232f9e5b'/%3E%3C/svg%3E" width="400" height="300" alt="Блокнот"><h2>Блокнот</h2><p class="price">290 ₽</p><button class="buy" data-item="Блокнот">В корзину</button></article>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23fde9b8'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%23d9961a'/%3E%3C/svg%3E" width="400" height="300" alt="Рюкзак"><h2>Рюкзак</h2><p class="price">3490 ₽</p><button class="buy" data-item="Рюкзак">В корзину</button></article>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23e6d4f5'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%237a45b5'/%3E%3C/svg%3E" width="400" height="300" alt="Лампа"><h2>Лампа</h2><p class="price">1590 ₽</p><button class="buy" data-item="Лампа">В корзину</button></article>
+<article class="card"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23d0eef2'/%3E%3Crect x='130' y='80' width='140' height='140' fill='%231a8fa3'/%3E%3C/svg%3E" width="400" height="300" alt="Наушники"><h2>Наушники</h2><p class="price">2790 ₽</p><button class="buy" data-item="Наушники">В корзину</button></article>
+</main>
+<div id="dbg" hidden></div>
+<script>
+// Задержка ответа кнопки в мс. Одинаковая в обеих версиях. 0 — отключить.
+const DELAY = 1500;
+const log = {clicks:0, repeats:0, events:[]};
+let cart = 0;
+const cartEl = document.getElementById('cart');
+document.querySelectorAll('.buy').forEach(function(b){
+  let busy = false;
+  b.addEventListener('click', function(){
+    const t = Math.round(performance.now());
+    log.clicks++;
+    if (busy) { log.repeats++; log.events.push({t:t,item:b.dataset.item,repeat:true}); return; }
+    log.events.push({t:t,item:b.dataset.item,repeat:false});
+    busy = true;
+    setTimeout(function(){ busy = false; cart++; cartEl.textContent = 'Корзина: ' + cart; }, DELAY);
+  });
+});
+// Лог для исследователя: Shift+D показывает/скрывает панель
+document.addEventListener('keydown', function(e){
+  if (e.shiftKey && e.code === 'KeyD') {
+    const p = document.getElementById('dbg');
+    p.hidden = !p.hidden;
+    p.textContent = 'Всего кликов: ' + log.clicks + ' | Повторных: ' + log.repeats + '\n' + JSON.stringify(log.events);
+  }
+});
+</script>
+</body>
+</html>
