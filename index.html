@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Cigarette Waters — музыкальный проект Алексея Чернышева. Слушайте музыку на SoundCloud.">
+  <title>Cigarette Waters — Алексей Чернышев</title>
+  <style>
+    :root {
+      --bg: #101010;
+      --panel: #191919;
+      --text: #f1eee8;
+      --muted: #aaa49b;
+      --accent: #c4a77d;
+      --line: rgba(241,238,232,.14);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    header {
+      position: absolute; inset: 0 0 auto; z-index: 2;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      min-height: 78px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { font-size: 13px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; }
+    .nav-links { display: flex; gap: 28px; color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links a:hover, .text-link:hover { color: var(--accent); }
+    .hero {
+      min-height: 730px; display: grid; align-items: center; position: relative;
+      padding: 130px 0 90px; overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(16,16,16,.98) 0%, rgba(16,16,16,.82) 48%, rgba(16,16,16,.2) 100%),
+        linear-gradient(0deg, var(--bg) 0%, transparent 35%),
+        url("images/photo.jpg") center 38% / cover no-repeat;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .28em; font-size: 11px; font-weight: 700; }
+    h1 {
+      margin: 22px 0 12px; font-size: clamp(54px, 10vw, 116px);
+      line-height: .91; letter-spacing: -.075em; font-weight: 800;
+      text-transform: uppercase;
+    }
+    .artist { color: var(--muted); font-size: clamp(16px, 2vw, 21px); letter-spacing: .04em; }
+    .intro { max-width: 470px; margin: 28px 0 34px; color: #d0cbc3; font-size: 16px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 12px; padding: 14px 20px;
+      border: 1px solid var(--accent); color: var(--text); font-size: 11px;
+      letter-spacing: .16em; text-transform: uppercase; transition: .25s ease;
+    }
+    .button:hover { background: var(--accent); color: #111; }
+    .button span { font-size: 17px; }
+    section { padding: 105px 0; }
+    .section-top { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    h2 { margin: 0; font-size: clamp(30px, 5vw, 54px); letter-spacing: -.055em; text-transform: uppercase; }
+    .index { color: var(--accent); font-size: 11px; letter-spacing: .2em; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .about-copy { max-width: 490px; color: #c3beb6; font-size: 17px; }
+    .about-copy p { margin: 0 0 18px; }
+    .portrait {
+      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;
+      filter: saturate(.72); background: var(--panel);
+    }
+    .music { background: #171717; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .music-note { color: var(--muted); margin: -18px 0 28px; font-size: 14px; }
+    .player-shell { padding: 12px; background: #222; border: 1px solid var(--line); }
+    .player-shell iframe { display: block; width: 100%; height: 166px; border: 0; }
+    .soundcloud-link { display: inline-block; margin-top: 20px; color: var(--accent); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    footer { padding: 34px 0; color: var(--muted); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    @media (max-width: 700px) {
+      .wrap { width: min(100% - 36px, var(--max)); }
+      .nav { min-height: 68px; }
+      .nav-links { gap: 14px; font-size: 10px; }
+      .hero { min-height: 690px; background-position: 58% center; }
+      .hero-inner { padding-top: 40px; }
+      .about-grid { grid-template-columns: 1fr; gap: 34px; }
+      .about-grid .portrait { grid-row: 1; max-height: 560px; }
+      section { padding: 76px 0; }
+      .section-top { margin-bottom: 25px; }
+    }
+    @media (max-width: 420px) {
+      .brand { font-size: 11px; }
+      .nav-links { gap: 10px; letter-spacing: .06em; }
+      .hero { min-height: 620px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">Cigarette Waters</a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#about">О проекте</a>
+        <a href="#music">Музыка</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-inner">
+          <div class="eyebrow">Музыкальный проект</div>
+          <h1>Cigarette<br>Waters</h1>
+          <div class="artist">Алексей Чернышев</div>
+          <p class="intro">Музыка, настроение и личные истории. Cigarette Waters — мультижанровый авторский проект Алексея Чернышева.</p>
+          <a class="button" href="#music">Слушать музыку <span>↘</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-top">
+          <h2>О проекте</h2>
+          <span class="index">01 / ABOUT</span>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy">
+            <p><strong>Cigarette Waters</strong> — музыкальный проект Алексея Чернышева.</p>
+            <p>Начиная от плаксивого шугейза, заканчивая рычащей электроникой.</p>
+          </div>
+          <img class="portrait" src="images/photo2.jpg" alt="Алексей Чернышев" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="music" id="music">
+      <div class="wrap">
+        <div class="section-top">
+          <h2>Слушать</h2>
+          <span class="index">02 / SOUND</span>
+        </div>
+        <p class="music-note">Cigarette Waters на SoundCloud</p>
+        <div class="player-shell">
+<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2389620984&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/cigarettewaters" title="Cigarette Waters" target="_blank" style="color: #cccccc; text-decoration: none;">Cigarette Waters</a> · <a href="https://soundcloud.com/cigarettewaters/salty-lips" title="Salty lips" target="_blank" style="color: #cccccc; text-decoration: none;">Salty lips</a></div>
+        </div>
+        <a class="soundcloud-link" href="https://soundcloud.com/cigarettewaters" target="_blank" rel="noopener noreferrer">Открыть SoundCloud ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Cigarette Waters</span>
+      <span>Алексей Чернышев</span>
+    </div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
